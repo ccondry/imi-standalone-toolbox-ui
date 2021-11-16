@@ -10,15 +10,15 @@ const getters = {
       // auth API
       authUrlBase = 'http://localhost:3032/api/v1/auth'
       // direct to imi-standalone-toolbox-api
-      urlBase = 'http://localhost:3066/api/v1/imi-standalone'
+      urlBase = 'http://localhost:3077/api/v1/imi-standalone'
     }
 
     return {
+      user: authUrlBase + '/user',
       webex: authUrlBase + '/resource/joinWxmSupportRoom',
       version: urlBase + '/version',
       authVersion: authUrlBase + '/version',
-      doProvision: urlBase + '/provision',
-      getProvision: authUrlBase + '/provision',
+      provision: urlBase + '/provision',
       logout: authUrlBase + '/logout'
     }
   },

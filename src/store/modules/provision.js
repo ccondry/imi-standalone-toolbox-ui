@@ -2,7 +2,7 @@ import * as types from '../mutation-types'
 import {ToastProgrammatic as Toast} from 'buefy/src'
 
 const state = {
-  status: {}
+  status: null
 }
 
 const getters = {
@@ -11,8 +11,12 @@ const getters = {
 
 const mutations = {
   [types.SET_PROVISION_STATUS] (state, data) {
-    console.log('SET_PROVISION_STATUS', data[0])
-    state.status = data[0].demo['imi-standalone-v1']
+    try {
+      // console.log('SET_PROVISION_STATUS', data.demo['imi-standalone-v1'].status)
+      state.status = data.demo['imi-standalone-v1'].status
+    } catch (e) {
+      // leave it
+    }
   }
 }
 
@@ -20,76 +24,45 @@ const actions = {
   async getProvision ({getters, dispatch}) {
     const response = await dispatch('fetch', {
       message: 'get provision status',
-      group: 'provision',
-      type: 'list',
-      url: getters.endpoints.getProvision,
-      mutation: types.SET_PROVISION_STATUS,
-      options: {
-        query: {
-          demo: 'imi-standalone',
-          version: 'v1'
-        }
-      }
+      group: 'app',
+      type: 'provision',
+      url: getters.endpoints.user,
+      mutation: types.SET_PROVISION_STATUS
     })
     if (response instanceof Error) {
       // error
-    } else {
-      // success
-      // check if provision status is "started" for any agent or supervisor
-      let keys
-      try {
-        keys = Object.keys(response[0].demo['imi-standalone-v1'])
-      } catch (e) {
-        // no demo information on user, so provision must not be started
-        return
-      }
-      let refresh = false
-      for (const key of keys) {
-        const provision = response[0].demo['imi-standalone-v1'][key]
-        try {
-          if (
-            provision.agent === 'started' ||
-            provision.supervisor === 'started'
-          ) {
-            refresh = true
-          }
-        } catch (e) {
-          continue
-        }
-      }
-      // and check provision status for them again in a moment
-      if (refresh) {
-        window.setTimeout(() => {
-          dispatch('getProvision')
-        }, 10 * 1000)
-      }
+      return
+    }
+    // success
+    // check if provision status is "started"
+    const provision = response.demo['imi-standalone-v1'].status
+    // and check provision status for them again in a moment
+    if (provision === 'started') {
+      window.setTimeout(() => {
+        dispatch('getProvision')
+      }, 10 * 1000)
     }
   },
-  async provisionUser ({getters, dispatch}, vertical) {
-    const email = getters.jwtUser.email
+  async provisionUser ({getters, dispatch}) {
     const response = await dispatch('fetch', {
       message: 'provision user',
-      group: 'provision',
-      type: vertical,
-      url: getters.endpoints.doProvision,
-      message: 'Provision ' + vertical,
+      group: 'app',
+      type: 'provision',
+      url: getters.endpoints.provision,
+      message: 'Provision IMI Standalone',
       options: {
-        method: 'POST',
-        body: {
-          email,
-          vertical
-        }
+        method: 'POST'
       }
     })
     if (response instanceof Error) {
       Toast.open({
-        message: `Failed to provision you for ${vertical}: ${response.message}`,
+        message: `Failed to provision you for IMI Standalone: ${response.message}`,
         duration: 10 * 1000,
         type: 'is-danger'
       })
     } else {
       // check provision status again now to get updated data from server
-      dispatch('getProvision', vertical)
+      dispatch('getProvision')
     }
   }
 }
