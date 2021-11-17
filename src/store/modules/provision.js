@@ -2,18 +2,19 @@ import * as types from '../mutation-types'
 import {ToastProgrammatic as Toast} from 'buefy/src'
 
 const state = {
-  status: null
+  provision: {}
 }
 
 const getters = {
-  provisionStatus: state => state.status
+  provisionStatus: state => state.provision.status,
+  provisionData: state => state.provision
 }
 
 const mutations = {
   [types.SET_PROVISION_STATUS] (state, data) {
     try {
       // console.log('SET_PROVISION_STATUS', data.demo['imi-standalone-v1'].status)
-      state.status = data.demo['imi-standalone-v1'].status
+      state.provision = data.demo['imi-standalone-v1']
     } catch (e) {
       // leave it
     }
