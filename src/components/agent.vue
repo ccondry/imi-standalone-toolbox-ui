@@ -38,13 +38,6 @@
             <copy :value="agentUsername" name="Username" />
           </p>
 
-          <!-- <p v-if="isProvisionComplete">
-            <strong>
-              Password:
-              {{ agentPassword }}
-            </strong>
-            <copy :value="agentPassword" name="Password" />
-          </p> -->
           <p v-if="isProvisionStarted">
             <strong>
               Status: Provisioning...
@@ -73,21 +66,24 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      agentPicture: 'https://mm.cxdemo.net/static/images/cumulus/common/sandra.png',
-      // agentUsername: 'test',
-      agentPassword: 'test'
+      agentPicture: 'https://mm.cxdemo.net/static/images/cumulus/common/sandra.png'
     }
   },
   
   computed: {
     ...mapGetters([
+      'provisionData',
       'provisionStatus',
       'loading',
       'working',
       'jwtUser'
     ]),
     agentUsername () {
-      return this.jwtUser.email
+      // append +dcloudimi tag to the user's email
+      // const emailParts = this.jwtUser.email.split('@')
+      // emailParts[0] += '+dcloudimi'
+      // return emailParts.join('@')
+      return this.provisionData.email
     },
     isProvisionComplete () {
       return this.provisionStatus === 'complete'
