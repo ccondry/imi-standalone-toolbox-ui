@@ -38,6 +38,15 @@
             <copy :value="agentUsername" name="Username" />
           </p>
 
+          <p v-if="isProvisionComplete">
+            <strong style="white-space:nowrap">
+              Password:
+            </strong>
+            <span>
+              your chosen password
+            </span>
+          </p>
+
           <p v-if="isProvisionStarted">
             <strong>
               Status: Provisioning...
@@ -56,6 +65,19 @@
           {{ isProvisionError ? 'Retry Provision' : 'Provision Me for IMI Standalone' }}
         </b-button>
       </article>
+    </div>
+
+    <!-- portal button -->
+    <div class="buttons" style="justify-content: space-around;">
+      <b-field>
+        <a
+        href="https://login-us.imiconnect.io"
+        target="_blank"
+        class="button is-primary is-rounded is-fullwidth"
+        >
+          Go to IMI Connect
+        </a>
+      </b-field>
     </div>
   </panel>
 </template>
