@@ -62,7 +62,7 @@
         :disabled="isLoading || isWorking"
         @click="clickProvision"
         >
-          {{ isProvisionError ? 'Retry Provision' : 'Provision Me for IMI Standalone' }}
+          {{ isProvisionError ? 'Retry Provision' : 'Provision Me for IMIConnect' }}
         </b-button>
       </article>
     </div>
@@ -75,7 +75,7 @@
         target="_blank"
         class="button is-primary is-rounded is-fullwidth"
         >
-          Go to IMI Connect
+          Go to IMIConnect
         </a>
       </b-field>
     </div>

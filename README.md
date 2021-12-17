@@ -1,5 +1,5 @@
 # imi-standalone-toolbox-ui
-The dCloud IMI Standalone Demo Toolbox web portal UI project. It is built on
+The dCloud IMIConnect Demo Toolbox web portal UI project. It is built on
 Vue.js 2.6 (including vue-router and vuex), using Webpack 4.
 
 ## Development

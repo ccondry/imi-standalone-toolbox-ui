@@ -50,14 +50,14 @@ const actions = {
       group: 'app',
       type: 'provision',
       url: getters.endpoints.provision,
-      message: 'Provision IMI Standalone',
+      message: 'Provision IMIConnect',
       options: {
         method: 'POST'
       }
     })
     if (response instanceof Error) {
       Toast.open({
-        message: `Failed to provision you for IMI Standalone: ${response.message}`,
+        message: `Failed to provision you for IMIConnect: ${response.message}`,
         duration: 10 * 1000,
         type: 'is-danger'
       })

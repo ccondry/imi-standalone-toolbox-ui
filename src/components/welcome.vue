@@ -1,7 +1,7 @@
 <template>
   <panel :title="`Welcome ${jwtUser.firstName}!`" aria-id="welcome">
     <p>
-      Welcome to the Cisco Webex IMI Standalone v1 Demo on dCloud.
+      Welcome to the Cisco Webex IMIConnect v1 Demo on dCloud.
     </p>
     <p>
       Join our Webex support room to get help, ask questions, and
