@@ -3,6 +3,9 @@
     <!-- welcome -->
     <welcome />
 
+    <!-- demo website -->
+    <demo-website />
+
     <!-- the available agent -->
     <agent />
 
@@ -13,6 +16,7 @@
 
 <script>
 import Welcome from '../components/welcome'
+import DemoWebsite from '../components/demo-website'
 import Agent from '../components/agent'
 import AppFooter from '../components/app-footer'
 
