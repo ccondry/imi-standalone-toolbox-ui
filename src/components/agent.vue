@@ -17,7 +17,6 @@
       style="border: 1px solid rgb(204, 204, 204);"
       >
         <div v-if="isProvisionStarted || isProvisionComplete">
-            
           <p class="title" style="white-space: nowrap;">
             Sandra Jefferson
           </p>
