@@ -8,8 +8,10 @@ const getters = {
       authUrlBase = '/api/v1/auth'
     } else {
       // auth API
-      authUrlBase = 'http://localhost:3032/api/v1/auth'
+      // authUrlBase = 'http://localhost:3032/api/v1/auth'
+      authUrlBase = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth'
       // direct to imi-standalone-toolbox-api
+      // urlBase = 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/imi-standalone'
       urlBase = 'http://localhost:3077/api/v1/imi-standalone'
     }
 
