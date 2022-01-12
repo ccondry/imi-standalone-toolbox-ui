@@ -1,7 +1,7 @@
 <template>
-  <panel title="Appointments" aria-id="appointments">
+  <panel title="Appointment" aria-id="appointment">
     <p>
-      Fill in this form and click Send to start the Appointments Demo.
+      Fill in this form and click Send to start the Appointment Demo.
     </p>
     <!-- channel -->
     <b-field label="Channel">
@@ -26,7 +26,7 @@
     
     <!-- customer name -->
     <b-field label="Name" expanded>
-      <b-input v-model="form.name" required />
+      <b-input v-model="form.name" />
     </b-field>
 
     <!-- phone number and country -->
@@ -54,19 +54,20 @@
 
       <!-- customer number -->
       <b-field label="Phone Number">
-        <b-input v-model="form.number" required />
+        <b-input v-model="form.number" required @keyup.enter.native="clickStartDemo" />
       </b-field>
     </b-field>
 
     <!-- send button -->
     <div class="buttons" style="justify-content: space-around;">
-      <!-- start collections demo -->
+      <!-- start demo -->
       <b-button
       type="is-success"
       rounded
-      @click="clickStartAppointmentsDemo"
+      @click="clickStartDemo"
+      :disabled="!formComplete || isWorking"
       >
-        Send
+        {{ isWorking ? 'Sending...' : 'Send' }}
       </b-button>
     </div>
   </panel>
@@ -88,8 +89,15 @@ export default {
 
   computed: {
     ...mapGetters([
-      'jwtUser'
-    ])
+      'jwtUser',
+      'working'
+    ]),
+    formComplete () {
+      return this.form.number.length
+    },
+    isWorking () {
+      return this.working.demo.appointment
+    }
   },
 
   watch: {
@@ -104,15 +112,17 @@ export default {
 
   methods: {
     ...mapActions([
-      'startAppointmentsDemo'
+      'startAppointmentDemo'
     ]),
     copyUserData () {
       if (this.jwtUser && this.jwtUser.email) {
-        this.form.name = this.jwtUser.firstName + ' ' + this.jwtUser.lastName
+        this.form.name = this.jwtUser.firstName
       }
     },
-    clickStartAppointmentsDemo () {
-      this.startAppointmentsDemo(this.form)
+    clickStartDemo () {
+      if (this.formComplete) {
+        this.startAppointmentDemo(this.form)
+      }
     }
   }
 }

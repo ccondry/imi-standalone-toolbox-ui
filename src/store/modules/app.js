@@ -7,6 +7,7 @@ import {version} from '../../../package.json'
 const state = {
   loading: {
     app: {},
+    demo: {},
     user: {},
     users: {},
     dcloud: {},
@@ -14,6 +15,7 @@ const state = {
   },
   working: {
     app: {},
+    demo: {},
     user: {},
     users: {},
     dcloud: {},

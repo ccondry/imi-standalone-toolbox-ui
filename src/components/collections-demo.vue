@@ -30,13 +30,13 @@
         <b-input
         v-model="form.customerSalutation"
         style="width: 6rem;"
-        placeholder="Mx"
+        placeholder=""
         />
       </b-field>
 
       <!-- customer name -->
       <b-field label="Name" expanded>
-        <b-input v-model="form.customerName" required />
+        <b-input v-model="form.customerName" />
       </b-field>
     </b-field>
 
@@ -65,45 +65,25 @@
 
       <!-- customer number -->
       <b-field label="Phone Number">
-        <b-input v-model="form.customerNumber" required />
+        <b-input v-model="form.customerNumber" required @keyup.enter.native="clickStartDemo" />
       </b-field>
     </b-field>
 
     <!-- customer email -->
-    <b-field label="Email">
+    <!-- <b-field label="Email">
       <b-input v-model="form.customerEmail" />
-    </b-field>
+    </b-field> -->
 
-    <!-- country and currency -->
+    <!-- currency and amount of debt -->
     <b-field grouped>
       <!-- currency -->
       <b-field label="Currency">
         <!-- $ -->
-        <b-radio-button
+        <b-input
         v-model="form.currency"
-        native-value="$"
-        type="is-success is-light is-outlined"
-        >
-          <span>$</span>
-        </b-radio-button>
-        
-        <!-- £ -->
-        <b-radio-button
-        v-model="form.currency"
-        native-value="£"
-        type="is-success is-light is-outlined"
-        >
-          <span>£</span>
-        </b-radio-button>
-
-        <!-- € -->
-        <b-radio-button
-        v-model="form.currency"
-        native-value="€"
-        type="is-success is-light is-outlined"
-        >
-          <span>€</span>
-        </b-radio-button>
+        placeholder="$"
+        style="width: 6rem;"
+        />
       </b-field>
 
       <!-- debt amount -->
@@ -113,9 +93,9 @@
     </b-field>
 
     <!-- customer reference number -->
-    <b-field label="Reference Number">
+    <!-- <b-field label="Reference Number">
       <b-input v-model="form.customerReferenceNumber" />
-    </b-field>
+    </b-field> -->
 
     <!-- send button -->
     <div class="buttons" style="justify-content: space-around;">
@@ -123,9 +103,10 @@
       <b-button
       type="is-success"
       rounded
-      @click="clickStartCollectionsDemo"
+      @click="clickStartDemo"
+      :disabled="!formComplete || isWorking"
       >
-        Send
+        {{ isWorking ? 'Sending...' : 'Send' }}
       </b-button>
     </div>
   </panel>
@@ -140,21 +121,29 @@ export default {
         country: 'US',
         customerName: '',
         customerNumber: '',
-        customerEmail: '',
-        customerSalutation: 'Mx',
+        // customerEmail: '',
+        customerSalutation: '',
         debtAmount: '200',
+        debtCurrency: '$',
         currency: '$',
-        reminderRequiredStatus: 'Y',
-        channel: 'sms',
-        customerReferenceNumber: '0012E00002AHLDEQA5'
+        // reminderRequiredStatus: 'Y',
+        channel: 'sms'
+        // customerReferenceNumber: '0012E00002AHLDEQA5'
       }
     }
   },
 
   computed: {
     ...mapGetters([
-      'jwtUser'
-    ])
+      'jwtUser',
+      'working'
+    ]),
+    formComplete () {
+      return this.form.customerNumber.length
+    },
+    isWorking () {
+      return this.working.demo.collections
+    }
   },
 
   watch: {
@@ -173,12 +162,14 @@ export default {
     ]),
     copyUserData () {
       if (this.jwtUser && this.jwtUser.email) {
-        this.form.customerName = this.jwtUser.firstName + ' ' + this.jwtUser.lastName
-        this.form.customerEmail = this.jwtUser.email
+        this.form.customerName = this.jwtUser.firstName
+        // this.form.customerEmail = this.jwtUser.email
       }
     },
-    clickStartCollectionsDemo () {
-      this.startCollectionsDemo(this.form)
+    clickStartDemo () {
+      if (this.formComplete) {
+        this.startCollectionsDemo(this.form)
+      }
     }
   }
 }

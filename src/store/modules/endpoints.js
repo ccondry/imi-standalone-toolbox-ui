@@ -17,7 +17,7 @@ const getters = {
 
     return {
       collectionsDemo: urlBase + '/demo/collections',
-      appointmentsDemo: urlBase + '/demo/appointments',
+      appointmentDemo: urlBase + '/demo/appointment',
       user: authUrlBase + '/user',
       webex: authUrlBase + '/resource/joinImiSupportRoom',
       version: urlBase + '/version',

@@ -24,12 +24,12 @@ const actions = {
       })
     }
   },
-  async startAppointmentsDemo ({getters, dispatch}, body) {
+  async startAppointmentDemo ({getters, dispatch}, body) {
     const response = await dispatch('fetch', {
-      message: 'start appointments demo',
+      message: 'start appointment demo',
       group: 'demo',
-      type: 'appointments',
-      url: getters.endpoints.appointmentsDemo,
+      type: 'appointment',
+      url: getters.endpoints.appointmentDemo,
       options: {
         method: 'POST',
         body

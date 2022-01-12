@@ -1,7 +1,7 @@
 <template>
   <panel title="Demos" aria-id="demos">
     <div style="display: flex; justify-content: space-between;">
-      <appointments-demo style="margin-right: 2rem;" />
+      <appointment-demo style="margin-right: 2rem;" />
       <collections-demo v-show="isAdmin" />
     </div>
   </panel>
@@ -9,12 +9,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import AppointmentsDemo from './appointments-demo.vue'
+import AppointmentDemo from './appointment-demo.vue'
 import CollectionsDemo from './collections-demo.vue'
 
 export default {
   components: {
-    AppointmentsDemo,
+    AppointmentDemo,
     CollectionsDemo
   },
 
