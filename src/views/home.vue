@@ -3,11 +3,14 @@
     <!-- welcome -->
     <welcome />
 
+    <!-- the available agent -->
+    <agent />
+
     <!-- demo website -->
     <demo-website />
 
-    <!-- the available agent -->
-    <agent />
+    <!-- demo -->
+    <demo />
 
     <!-- Copyright and version footer -->
     <app-footer style="margin-bottom: 1rem;" />
@@ -15,16 +18,19 @@
 </template>
 
 <script>
-import Welcome from '../components/welcome'
-import DemoWebsite from '../components/demo-website'
 import Agent from '../components/agent'
 import AppFooter from '../components/app-footer'
+import Demo from '../components/demo'
+import DemoWebsite from '../components/demo-website'
+import Welcome from '../components/welcome'
 
 export default {
   components: {
-    Welcome,
     Agent,
-    AppFooter
+    AppFooter,
+    Demo,
+    DemoWebsite,
+    Welcome
   }
 }
 </script>

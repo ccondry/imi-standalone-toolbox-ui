@@ -1,13 +1,15 @@
 import app from './app'
-import user from './user'
+import demo from './demo'
 import endpoints from './endpoints'
-import webex from './webex'
 import provision from './provision'
+import user from './user'
+import webex from './webex'
 
 export default {
   app,
-  user,
+  demo,
   endpoints,
-  webex,
-  provision
+  provision,
+  user,
+  webex
 }
