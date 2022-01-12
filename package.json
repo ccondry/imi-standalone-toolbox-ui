@@ -1,6 +1,6 @@
 {
   "name": "imi-standalone-toolbox-ui",
-  "version": "2021.11.18",
+  "version": "2022.1.12",
   "description": "UI for the dCloud IMIConnect Demo Toolbox",
   "author": "Coty Condry <ccondry@cisco.com>",
   "main": "dist/js/index.common.js",

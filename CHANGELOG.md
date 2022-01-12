@@ -4,6 +4,12 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2022.1.12
+
+### Features
+* **Demos:** Add demo panel with collections and appointments demos.
+
+
 # 2021.11.18
 
 ### Features
