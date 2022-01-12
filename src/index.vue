@@ -36,15 +36,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'isLoggedIn',
-      'isAdmin',
-      'jwtUser',
-      'sessionId',
-      // 'loading'
+      'isLoggedIn'
     ])
-    // isLoading () {
-    //   return this.loading.app.version
-    // }
   },
 
   watch: {
