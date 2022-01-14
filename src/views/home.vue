@@ -7,7 +7,7 @@
     <agent />
 
     <!-- demo website -->
-    <demo-website />
+    <!-- <demo-website /> -->
 
     <!-- demo -->
     <demo />
@@ -21,7 +21,7 @@
 import Agent from '../components/agent'
 import AppFooter from '../components/app-footer'
 import Demo from '../components/demo'
-import DemoWebsite from '../components/demo-website'
+// import DemoWebsite from '../components/demo-website'
 import Welcome from '../components/welcome'
 
 export default {
@@ -29,7 +29,7 @@ export default {
     Agent,
     AppFooter,
     Demo,
-    DemoWebsite,
+    // DemoWebsite,
     Welcome
   }
 }
