@@ -1,28 +1,11 @@
 <template>
-  <panel title="Collections" aria-id="collections">
+  <panel title="Collections or Promise to Pay" aria-id="collections">
     <p>
-      Fill in this form and click Send to start the Collections Demo.
+      Fill in this form and click Send to start the Collections or Promise to
+      Pay Demo.
     </p>
     <!-- channel -->
-    <b-field label="Channel">
-      <!-- SMS -->
-      <b-radio-button
-      v-model="form.channel"
-      native-value="sms"
-      type="is-success is-light is-outlined"
-      >
-        <span>SMS</span>
-      </b-radio-button>
-      
-      <!-- Whatsapp -->
-      <b-radio-button
-      v-model="form.channel"
-      native-value="whatsapp"
-      type="is-success is-light is-outlined"
-      >
-        <span>Whatsapp</span>
-      </b-radio-button>
-    </b-field>
+    <channel v-model="form.channel" />
     
     <b-field grouped>
       <!-- customerSalutation -->
@@ -42,54 +25,23 @@
 
     <!-- phone number and country -->
     <b-field grouped>
-    <!-- country -->
-      <b-field label="Country">
-        <!-- US -->
-        <b-radio-button
-        v-model="form.country"
-        native-value="US"
-        type="is-success is-light is-outlined"
-        >
-          <span>US</span>
-        </b-radio-button>
-        
-        <!-- UK -->
-        <b-radio-button
-        v-model="form.country"
-        native-value="UK"
-        type="is-success is-light is-outlined"
-        >
-          <span>UK</span>
-        </b-radio-button>
-      </b-field>
+      <!-- country -->
+      <country
+      v-show="form.channel === 'sms'"
+      v-model="form.country"
+      />
 
       <!-- customer number -->
-      <b-field label="Phone Number">
-        <b-input v-model="form.customerNumber" required @keyup.enter.native="clickStartDemo" />
-      </b-field>
+      <phone v-model="form.customerNumber" />
     </b-field>
-
-    <!-- customer email -->
-    <!-- <b-field label="Email">
-      <b-input v-model="form.customerEmail" />
-    </b-field> -->
 
     <!-- currency and amount of debt -->
     <b-field grouped>
       <!-- currency -->
-      <b-field label="Currency">
-        <!-- $ -->
-        <b-input
-        v-model="form.currency"
-        placeholder="$"
-        style="width: 6rem;"
-        />
-      </b-field>
+      <currency v-model="form.currency" />
 
       <!-- debt amount -->
-      <b-field label="Debt Amount">
-        <b-input v-model="form.debtAmount" required />
-      </b-field>
+      <amount v-model="form.debtAmount" />
     </b-field>
 
     <!-- customer reference number -->
@@ -103,8 +55,8 @@
       <b-button
       type="is-success"
       rounded
-      @click="clickStartDemo"
       :disabled="!formComplete || isWorking"
+      @click="clickStartDemo"
       >
         {{ isWorking ? 'Sending...' : 'Send' }}
       </b-button>
@@ -114,7 +66,21 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Amount from './input/amount'
+import Channel from './input/channel'
+import Country from './input/country'
+import Currency from './input/currency'
+import Phone from './input/phone'
+
 export default {
+  components: {
+    Amount,
+    Channel,
+    Country,
+    Currency,
+    Phone
+  },
+
   data () {
     return {
       form: {
@@ -123,13 +89,13 @@ export default {
         customerNumber: '',
         // customerEmail: '',
         customerSalutation: '',
-        debtAmount: '200',
-        debtCurrency: '$',
-        currency: '$',
+        debtAmount: 200,
+        currency: 'USD',
         // reminderRequiredStatus: 'Y',
         channel: 'sms'
         // customerReferenceNumber: '0012E00002AHLDEQA5'
-      }
+      },
+      
     }
   },
 
@@ -161,12 +127,14 @@ export default {
       'startCollectionsDemo'
     ]),
     copyUserData () {
+      // copy user first name to form when we get JWT info
       if (this.jwtUser && this.jwtUser.email) {
         this.form.customerName = this.jwtUser.firstName
         // this.form.customerEmail = this.jwtUser.email
       }
     },
     clickStartDemo () {
+      // send SMS/whatsapp message
       if (this.formComplete) {
         this.startCollectionsDemo(this.form)
       }

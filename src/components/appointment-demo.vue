@@ -1,28 +1,10 @@
 <template>
-  <panel title="Appointment" aria-id="appointment">
+  <panel title="Appointments" aria-id="appointments">
     <p>
-      Fill in this form and click Send to start the Appointment Demo.
+      Fill in this form and click Send to start the Appointments Demo.
     </p>
     <!-- channel -->
-    <b-field label="Channel">
-      <!-- SMS -->
-      <b-radio-button
-      v-model="form.channel"
-      native-value="sms"
-      type="is-success is-light is-outlined"
-      >
-        <span>SMS</span>
-      </b-radio-button>
-      
-      <!-- Whatsapp -->
-      <b-radio-button
-      v-model="form.channel"
-      native-value="whatsapp"
-      type="is-success is-light is-outlined"
-      >
-        <span>Whatsapp</span>
-      </b-radio-button>
-    </b-field>
+    <channel v-model="form.channel" />
     
     <!-- customer name -->
     <b-field label="Name" expanded>
@@ -31,31 +13,11 @@
 
     <!-- phone number and country -->
     <b-field grouped>
-    <!-- country -->
-      <b-field label="Country">
-        <!-- US -->
-        <b-radio-button
-        v-model="form.country"
-        native-value="US"
-        type="is-success is-light is-outlined"
-        >
-          <span>US</span>
-        </b-radio-button>
-        
-        <!-- UK -->
-        <b-radio-button
-        v-model="form.country"
-        native-value="UK"
-        type="is-success is-light is-outlined"
-        >
-          <span>UK</span>
-        </b-radio-button>
-      </b-field>
+      <!-- country -->
+      <country v-model="form.country" />
 
       <!-- customer number -->
-      <b-field label="Phone Number">
-        <b-input v-model="form.number" required @keyup.enter.native="clickStartDemo" />
-      </b-field>
+      <phone v-model="form.number" />
     </b-field>
 
     <!-- send button -->
@@ -64,8 +26,8 @@
       <b-button
       type="is-success"
       rounded
-      @click="clickStartDemo"
       :disabled="!formComplete || isWorking"
+      @click="clickStartDemo"
       >
         {{ isWorking ? 'Sending...' : 'Send' }}
       </b-button>
@@ -75,7 +37,17 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Channel from './input/channel'
+import Country from './input/country'
+import Phone from './input/phone'
+
 export default {
+  components: {
+    Channel,
+    Country,
+    Phone
+  },
+
   data () {
     return {
       form: {
