@@ -30,7 +30,7 @@
         :src="qr"
         alt="Whatsapp QR code"
         style="width: 145px;"
-        />
+        >
       </center>
     </div>
   </div>
