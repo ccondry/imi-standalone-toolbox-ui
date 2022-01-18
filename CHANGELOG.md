@@ -4,6 +4,13 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2022.1.18
+
+### Fixes
+* **Demos:** Add Call Deflection demo with phone numbers for US and UK/Europe.
+Add QR code for the Whatsapp demos.
+
+
 # 2022.1.12-1
 
 ### Fixes
