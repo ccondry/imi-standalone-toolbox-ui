@@ -4,7 +4,7 @@
       Country
       <b-tooltip
       type="is-dark"
-      label="Your mobile phone number's region"
+      :label="tooltip"
       >
         <b-icon size="is-small" icon="information-outline" />
       </b-tooltip>
@@ -32,6 +32,10 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    tooltip: {
+      type: String,
+      default: `Your mobile phone number's region`
     }
   },
 

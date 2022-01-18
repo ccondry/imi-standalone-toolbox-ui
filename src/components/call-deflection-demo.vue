@@ -3,6 +3,7 @@
     <!-- country -->
     <country
     v-model="country"
+    info="Select your region to show the demo number"
     />
     <p>
       Call this number to start the Call Deflection Demo:
