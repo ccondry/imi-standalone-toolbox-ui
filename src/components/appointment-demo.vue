@@ -14,7 +14,10 @@
     <!-- phone number and country -->
     <b-field grouped>
       <!-- country -->
-      <country v-model="form.country" />
+      <country
+      v-show="form.channel === 'sms'"
+      v-model="form.country"
+      />
 
       <!-- customer number -->
       <phone v-model="form.number" />
