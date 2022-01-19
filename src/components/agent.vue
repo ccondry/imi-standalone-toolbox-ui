@@ -41,9 +41,16 @@
             <strong style="white-space:nowrap">
               Password:
             </strong>
-            <span>
-              your chosen password
-            </span>
+            <b-tooltip
+            type="is-dark"
+            label="Use the password you created after clicking the activation link that IMI sent to your email. You can reset it on the IMIConnect login page."
+            multilined
+            >
+              <span>
+                your chosen password
+              </span>
+              <b-icon size="is-small" icon="information-outline" />
+            </b-tooltip>
           </p>
 
           <p v-if="isProvisionStarted">
