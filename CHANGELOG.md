@@ -4,6 +4,13 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2022.1.19
+
+### Fixes
+* **IMI Connect:** Add tooltip about what password to use for IMIConnect and 
+that it can be reset on the IMIConnect page.
+
+
 # 2022.1.18
 
 ### Fixes
