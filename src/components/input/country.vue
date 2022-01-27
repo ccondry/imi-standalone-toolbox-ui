@@ -14,14 +14,14 @@
     native-value="US"
     type="is-success is-light is-outlined"
     >
-      <span>US/APJ</span>
+      <span>US</span>
     </b-radio-button>
     <b-radio-button
     v-model="country"
     native-value="UK"
     type="is-success is-light is-outlined"
     >
-      <span>UK/Europe</span>
+      <span>UK</span>
     </b-radio-button>
   </b-field>
 </template>
