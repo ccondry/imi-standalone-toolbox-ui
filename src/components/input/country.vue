@@ -35,7 +35,7 @@ export default {
     },
     tooltip: {
       type: String,
-      default: `Your mobile phone number's region`
+      default: `Select either US or UK SMS gateway`
     }
   },
 
