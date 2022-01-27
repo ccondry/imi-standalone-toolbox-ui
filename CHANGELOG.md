@@ -4,6 +4,19 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2022.1.27
+
+### Features
+* **Site:** Reload the page when fetch catches exception. This should redirect
+users to the dCloud portal when their session cookie has expired and they try
+to use one of the buttons. Also reload the page after 2 hours.
+
+
+### Fixes
+* **IMI Connect:** Change country selectors to just be US and UK, removing APJ
+and Europe text. Update tooltip text for SMS country selectors. 
+
+
 # 2022.1.19
 
 ### Fixes
