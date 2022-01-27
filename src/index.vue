@@ -60,6 +60,11 @@ export default {
     this.getApiVersion()
     // get the auth REST API version
     this.getAuthApiVersion()
+    // reload the page after 2 hours to redirect user to dCloud portal for a new
+    // cookie
+    setTimeout(() => {
+      location.reload()
+    }, 2 * 60 * 60 * 1000)
   },
 
   methods: {
