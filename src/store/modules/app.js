@@ -178,6 +178,8 @@ const actions = {
           queue: false
         })
       }
+      // refresh the page - we probably hit the 2 hour dcloud cookie timeout
+      location.reload()
     } finally {
       dispatch(loadingOrWorking, {group, type, value: false})
     }
