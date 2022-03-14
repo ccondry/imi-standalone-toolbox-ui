@@ -21,25 +21,24 @@
       </b-radio-button>
     </b-field>
     
-    <div v-show="channel === 'whatsapp'">
-      <span style="white-space: nowrap;">
-        Scan this QR code before starting the Whatsapp demo:
-      </span>
+    <div v-show="channel === 'whatsapp'" style="padding-left: 1rem; padding-right: 1rem;">
+      Before starting the Whatsapp demo, scan this QR code to send any message
+      to +447736239521:
       <center>
-        <img
-        :src="qr"
-        alt="Whatsapp QR code"
-        style="width: 145px;"
-        >
+        <vue-qr :text="whatsappQrUrl" />
       </center>
     </div>
   </div>
 </template>
 
 <script>
-import qr from '../../assets/images/qr.svg'
+import VueQr from 'vue-qr'
 
 export default {
+  components: {
+    VueQr
+  },
+
   props: {
     value: {
       type: String,
@@ -47,13 +46,10 @@ export default {
     }
   },
 
-  data () {
-    return {
-      qr
-    }
-  },
-
   computed: {
+    whatsappQrUrl () {
+      return 'https://api.whatsapp.com/send?phone=447736239521'
+    },
     channel: {
       get () {
         return this.value
