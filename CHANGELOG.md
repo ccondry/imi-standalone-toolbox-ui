@@ -4,6 +4,13 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2022.3.14
+
+### Fixes
+* **IMI Connect:** Generate the Whatsapp QR at runtime to fix the old QR code
+was not working on many devices. Added text for user to bypass the QR code.
+
+
 # 2022.1.27
 
 ### Features
