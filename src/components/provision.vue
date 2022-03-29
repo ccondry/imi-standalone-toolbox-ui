@@ -10,20 +10,27 @@
       <p v-if="userDemoConfig.status === 'started'">
         Your account is being provisioned right now. Please wait...
       </p>
-      <p v-if="userDemoConfig.status !== 'started'">
-        Would you like to provision your account?
+      <p v-if="userDemoConfig.status === 'error'">
+        Your last provision attempt had an error: {{ userDemoConfig.error }}
       </p>
-      <b-field v-if="userDemoConfig.status !== 'started'">
-        <b-button
-        :disabled="working.user.provision"
-        type="is-success"
-        rounded
-        expanded
-        @click.prevent="clickProvision"
-        >
-          {{ buttonText }}
-        </b-button>
-      </b-field>
+      <div
+      v-if="userDemoConfig.status !== 'started'"
+      >
+        <p>
+          Would you like to provision your account?
+        </p>
+        <b-field>
+          <b-button
+          :disabled="working.user.provision"
+          type="is-success"
+          rounded
+          expanded
+          @click.prevent="clickProvision"
+          >
+            {{ buttonText }}
+          </b-button>
+        </b-field>
+      </div>
     </div>
   </panel>
 </template>
