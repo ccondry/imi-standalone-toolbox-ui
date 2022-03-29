@@ -11,3 +11,6 @@ export const SET_JWT = 'SET_JWT'
 
 // provision
 export const SET_PROVISION_STATUS = 'SET_PROVISION_STATUS'
+
+// user details
+export const SET_USER = 'SET_USER'

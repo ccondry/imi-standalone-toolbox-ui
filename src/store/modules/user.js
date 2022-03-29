@@ -1,4 +1,8 @@
-import {DialogProgrammatic as Dialog} from 'buefy/src'
+import {
+  DialogProgrammatic as Dialog,
+  ToastProgrammatic as Toast
+} from 'buefy/src'
+
 import * as types from '../mutation-types'
 
 // parse a JWT payload into a JSON object
@@ -9,12 +13,16 @@ function parseJwt (token) {
 }
 
 const state = {
-  jwt: null
+  jwt: null,
+  user: null
 }
 
 const mutations = {
   [types.SET_JWT] (state, data) {
     state.jwt = data
+  },
+  [types.SET_USER] (state, data) {
+    state.user = data
   }
 }
 
@@ -47,6 +55,21 @@ const getters = {
     } catch (e) {
       return {}
     }
+  },
+  userDemoConfig: (state, getters) => {
+    try {
+      return state.user.demo['imi-standalone-v1'] || {}
+    } catch (e) {
+      return {}
+    }
+  },
+  isProvisioned: (state, getters) => {
+    // user provision is complete
+    try {
+      return getters.userDemoConfig.status === 'complete'
+    } catch (e) {
+      return false
+    }
   }
 }
 
@@ -78,6 +101,8 @@ const actions = {
       commit(types.SET_JWT, jwt)
       // put JWT in localStorage
       window.localStorage.setItem('jwt', jwt)
+      // get full user details now
+      dispatch('getUser')
     } catch (e) {
       // parseJwt failed - delete this invalid JWT
       dispatch('unsetJwt')
@@ -123,6 +148,51 @@ const actions = {
     } else {
       // no JWT found - make the user log in
       dispatch('login')
+    }
+  },
+  async getUser ({dispatch, getters}) {
+    // get full user details
+    await dispatch('fetch', {
+      group: 'user',
+      type: 'details',
+      url: getters.endpoints.user,
+      message: 'get user details',
+      mutation: types.SET_USER
+    })
+
+    // if user is being provisioned right now
+    if (getters.userDemoConfig.status === 'started') {
+      // and check provision status for them again in a moment 
+      window.setTimeout(() => {
+        dispatch('getUser')
+      }, 10 * 1000)
+    }
+  },
+  async saveUserDemoConfig ({dispatch, getters}, body) {
+    const response = await dispatch('fetch', {
+      group: 'user',
+      type: 'demoConfig',
+      url: getters.endpoints.userDemoConfig,
+      options: {
+        method: 'POST',
+        body,
+        query: {
+          id: 'imi-standalone-v1'
+        }
+      },
+      message: 'Save demo configuration',
+      showNotification: true
+    })
+    if (response instanceof Error) {
+      // error
+    } else {
+      // success
+      Toast.open({
+        message: 'Saved your demo configuration.',
+        type: 'is-success'
+      })
+      // refresh state data
+      dispatch('getUser')
     }
   }
 }

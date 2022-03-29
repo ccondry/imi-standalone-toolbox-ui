@@ -20,6 +20,7 @@ const getters = {
       appointmentDemo: urlBase + '/demo/appointment',
       user: authUrlBase + '/user',
       webex: authUrlBase + '/resource/joinImiSupportRoom',
+      userDemoConfig: authUrlBase + '/user/demo',
       version: urlBase + '/version',
       authVersion: authUrlBase + '/version',
       provision: urlBase + '/provision',

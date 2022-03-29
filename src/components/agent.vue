@@ -43,7 +43,7 @@
             </strong>
             <b-tooltip
             type="is-dark"
-            label="Use the password you created after clicking the activation link that IMI sent to your email. You can reset it on the IMIConnect login page."
+            label="Use the password you created after clicking the activation link that IMI sent to your email. You can reset it on the Webex Connect login page."
             multilined
             >
               <span>
@@ -59,17 +59,7 @@
             </strong>
           </p>
         </div>
-        <!-- provision button -->
-        <b-button
-        v-show="!isProvisionStarted && !isProvisionComplete"
-        type="is-success"
-        rounded
-        expanded
-        :disabled="isLoading || isWorking"
-        @click="clickProvision"
-        >
-          {{ isProvisionError ? 'Retry Provision' : 'Provision Me for IMIConnect' }}
-        </b-button>
+        
       </article>
     </div>
 
@@ -81,7 +71,7 @@
         target="_blank"
         class="button is-primary is-rounded is-fullwidth"
         >
-          Go to IMIConnect
+          Go to Webex Connect
         </a>
       </b-field>
     </div>
@@ -100,7 +90,7 @@ export default {
   
   computed: {
     ...mapGetters([
-      'provisionData',
+      'userDemoConfig',
       'provisionStatus',
       'loading',
       'working',
@@ -108,10 +98,10 @@ export default {
     ]),
     agentUsername () {
       // append +dcloudimi tag to the user's email
-      // const emailParts = this.jwtUser.email.split('@')
+      const emailParts = this.jwtUser.email.split('@')
       // emailParts[0] += '+dcloudimi'
       // return emailParts.join('@')
-      return this.provisionData.email
+      return this.userDemoConfig.email || `${emailParts[0]}+dcloudimi@${emailParts[1]}`
     },
     isProvisionComplete () {
       return this.provisionStatus === 'complete'
@@ -137,9 +127,6 @@ export default {
     ]),
     clickCopy (string, type) {
       this.copyToClipboard({string, type})
-    },
-    clickProvision () {
-      this.provisionUser()
     }
   }
 }

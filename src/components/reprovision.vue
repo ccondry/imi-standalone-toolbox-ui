@@ -1,29 +1,23 @@
 <template>
-  <panel title="Provision" aria-id="provision">
-    <p v-if="isLocked">
-      <!-- provisioning is not enabled for this instance -->
-      Provisioning is disabled for this demo instance. Please try using
-      another dCloud datacenter or a newer version of this demo (if one is
-      available).
+  <panel title="Reprovision" aria-id="reprovision">
+    <p>
+      Your account is already provisioned for this demo. Would you like to
+      provision again anyway?
     </p>
-    <div v-if="!isLocked">
-      <p v-if="userDemoConfig.status === 'started'">
-        Your account is being provisioned right now. Please wait...
-      </p>
-      <p v-if="userDemoConfig.status !== 'started'">
-        Would you like to provision your account?
-      </p>
-      <b-field v-if="userDemoConfig.status !== 'started'">
-        <b-button
-        :disabled="working.user.provision"
-        type="is-success"
-        rounded
-        expanded
-        @click.prevent="clickProvision"
-        >
-          {{ buttonText }}
-        </b-button>
-      </b-field>
+    <p>
+      This will check allow you to change your Webex Connect account email
+      address if you need to.
+    </p>
+    <div class="buttons">
+      <b-button
+      :disabled="working.user.provision"
+      type="is-primary"
+      rounded
+      expanded
+      @click.prevent="clickProvision"
+      >
+        {{ buttonText }}
+      </b-button>
     </div>
   </panel>
 </template>
@@ -37,15 +31,14 @@ export default {
     ...mapGetters([
       'jwtUser',
       'working',
-      'sessionId',
-      'isLocked',
+      'loading',
       'userDemoConfig'
     ]),
     buttonText () {
       if (this.working.user.provision) {
         return `Working...`       
       } else {
-        return 'Provision Me'
+        return 'Provision Me Again'
       }
     }
   },
@@ -54,6 +47,12 @@ export default {
     ...mapActions([
       'provisionUser'
     ]),
+    startTimer () {
+      // advance the timer every 1 second
+      setInterval(() => {
+        this.timerNow = new Date().getTime()
+      }, 1000)
+    },
     clickProvision () {
       const emailParts = this.jwtUser.email.split('@')
       this.$buefy.modal.open({

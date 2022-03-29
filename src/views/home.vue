@@ -4,13 +4,19 @@
     <welcome />
 
     <!-- the available agent -->
-    <agent />
-
-    <!-- demo website -->
-    <!-- <demo-website /> -->
+    <agent v-if="isProvisioned" />
 
     <!-- demo -->
-    <demo />
+    <demo v-if="isProvisioned" />
+
+    <!-- Provision -->
+    <provision v-if="!isProvisioned" />
+
+    <!-- Reprovision -->
+    <reprovision v-if="isProvisioned" />
+
+    <!-- Admin -->
+    <admin v-if="isAdmin || isAdminSu" />
 
     <!-- Copyright and version footer -->
     <app-footer style="margin-bottom: 1rem;" />
@@ -18,19 +24,32 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Agent from '../components/agent'
 import AppFooter from '../components/app-footer'
 import Demo from '../components/demo'
-// import DemoWebsite from '../components/demo-website'
+import Provision from '../components/provision'
+import Reprovision from '../components/reprovision'
 import Welcome from '../components/welcome'
+import Admin from '../components/admin'
 
 export default {
   components: {
+    Admin,
     Agent,
     AppFooter,
     Demo,
-    // DemoWebsite,
+    Provision,
+    Reprovision,
     Welcome
+  },
+
+  computed: {
+    ...mapGetters([
+      'isAdmin',
+      'isAdminSu',
+      'isProvisioned'
+    ])
   }
 }
 </script>
