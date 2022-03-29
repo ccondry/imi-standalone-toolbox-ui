@@ -4,6 +4,14 @@ Version numbers are semver-compatible dates in YYYY.MM.DD-X format,
 where X is the revision number
 
 
+# 2022.3.29
+
+### Fixes
+* **Webex Connect:** Provisioning user using their input email address. Add
+reprovision button for users to try again. Show the provisioned email username
+in the agent login info panel.	Update branding to "Webex Connect".
+
+
 # 2022.3.14
 
 ### Fixes
