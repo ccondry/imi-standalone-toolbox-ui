@@ -5,7 +5,7 @@
       provision again anyway?
     </p>
     <p>
-      This will check allow you to change your Webex Connect account email
+      This will allow you to change your Webex Connect account email
       address if you need to.
     </p>
     <div class="buttons">
