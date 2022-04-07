@@ -1,7 +1,7 @@
 <template>
   <panel
-  title="IMI User"
-  aria-id="IMI User"
+  title="User Accounts"
+  aria-id="User Accounts"
   >
     <!-- loading/working -->
     <b-loading
