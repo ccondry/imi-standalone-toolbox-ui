@@ -1,6 +1,6 @@
 {
   "name": "imi-standalone-toolbox-ui",
-  "version": "2022.3.29-1",
+  "version": "2022.4.7",
   "description": "UI for the dCloud Webex Connect Demo Toolbox",
   "author": "Coty Condry <ccondry@cisco.com>",
   "main": "dist/js/index.common.js",
