@@ -44,7 +44,7 @@ export default {
     isLoggedIn (val, oldVal) {
       if (val && !oldVal) {
         // user just logged in. get provision status info.
-        this.getProvision()
+        // this.getProvision()
       } else if (!val && oldVal) {
         // user just logged out. make them log in again.
         this.login()
